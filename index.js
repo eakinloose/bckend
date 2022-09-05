@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const register = require("../backend/routes/register");
 const login = require("../backend/routes/login");
+const loan = require("../backend/routes/loan");
 
-const products = require("../backend/products");
 
 const app = express();
 
@@ -14,14 +14,8 @@ app.use(cors());
 
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/loan", loan);
 
-app.get("/", (req, res) => {
-   res.send("welcome");
-});
-
-app.get("/products", (req, res) => {
-   res.send(products);
-});
 
 const port = process.env.PORT;
 const uri = process.env.DB_URI;

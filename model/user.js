@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const userSchema = new mongoose.Schema({
    name: {
       type: String,
@@ -14,18 +15,30 @@ const userSchema = new mongoose.Schema({
       maxlength: 300,
       unique: true,
    },
-   occupation: {
-      type: String,
-      required: true,
-      minlength: 3,
-      maxlength: 300,
-   },
    password: {
       type: String,
       required: true,
       minlength: 3,
-      maxlength: 300,
+      maxlength: 300, 
    },
+   phone: {
+      type: Number,
+      required: true,
+      minlength: 3,
+      maxlength: 300, 
+   },
+   coreID: {
+      type: String,
+      minlength: 3,
+      maxlength: 300, 
+   },
+   host: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 300, 
+   },
+   // verified: Boolean
 });
 
 const User = mongoose.model("User", userSchema);

@@ -9,20 +9,21 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
    const schema = joi.object({
-      email: joi.string().min(3).max(300).required().email(),
+      coreID: joi.string().min(3).max(300).required(),
       password: joi.string().min(3).max(300).required(),
    });
    const { error } = schema.validate(req.body);
 
    if (error) return res.status(400).send(error.details[0].message);
 
-   let user = await User.findOne({ email: req.body.email });
+   let user = await User.findOne({ coreID: req.body.coreID });
    if (!user)
-      return res.status(400).send("This email does not exist on our Database");
+      return res.status(400).send("This coreID does not exist on our Database");
 
    const validPassword = await bcrypt.compare(req.body.password, user.password);
-   if (!validPassword)
+   if (!validPassword) {
       return res.status(400).send("Check password input characters");
+   }
 
    const token = genAuthToken(user);
 
